@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Mail, Code2, ArrowRight } from "lucide-react";
+import { Mail, Code2, ArrowRight, Phone } from "lucide-react";
 
 const GithubIcon = ({ size = 16 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -20,10 +20,11 @@ const LinkedinIcon = ({ size = 16 }: { size?: number }) => (
 );
 
 const LINKS = [
-  { label: "Email", href: "mailto:hemanthkumarbandari@gmail.com", icon: Mail },
-  { label: "LinkedIn", href: "https://linkedin.com/in/hemanthkumarbandari", icon: LinkedinIcon },
+  { label: "Email", href: "mailto:bandarihemanthkumar001@gmail.com", icon: Mail },
+  { label: "Phone", href: "tel:8106746301", icon: Phone },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/hemanth-kumar-bandari-317516399/", icon: LinkedinIcon },
   { label: "GitHub", href: "https://github.com/hemanthkumarbandari", icon: GithubIcon },
-  { label: "LeetCode", href: "https://leetcode.com/hemanthkumarbandari", icon: Code2 }
+  { label: "LeetCode", href: "https://leetcode.com/u/hemanthkumarbandari/", icon: Code2 }
 ];
 
 export const Contact: React.FC = () => {
