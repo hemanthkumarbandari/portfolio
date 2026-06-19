@@ -36,7 +36,7 @@ const PROJECTS: Project[] = [
     longDescription: "A production-grade machine learning system that automates loan approval decisions for financial institutions. The model ingests applicant financial data, runs it through a multi-layer neural network trained on historical loan data, and produces a risk score with explainability reports. The FastAPI backend handles thousands of concurrent requests with sub-100ms response times.",
     tech: ["Python", "TensorFlow", "FastAPI", "PostgreSQL", "Scikit-learn", "Pandas", "Docker", "REST API"],
     github: "https://github.com/hemanthkumarbandari/loan-approval-prediction",
-    live: "#",
+    live: "https://loan-approval-app-iud2.onrender.com/",
     color: "from-blue-500/10",
     accentColor: "rgba(59,130,246,0.15)",
     features: [
@@ -56,7 +56,7 @@ const PROJECTS: Project[] = [
     longDescription: "IND Masters is a full-stack e-learning ecosystem built for delivering professional courses online. The platform has three layers — a student-facing Next.js frontend for browsing and enrolling in courses, a Node.js/Express REST API backend handling authentication, payments, and content delivery, and a React-based admin panel for instructors to manage courses, users, and analytics.",
     tech: ["React.js", "Next.js", "Node.js", "Express", "MongoDB", "Tailwind CSS", "REST API", "JWT"],
     github: "#",
-    live: "#",
+    live: "https://iquantum.nuhvin.com",
     color: "from-purple-500/10",
     accentColor: "rgba(168,85,247,0.15)",
     features: [
