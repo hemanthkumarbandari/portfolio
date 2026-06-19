@@ -66,16 +66,18 @@ body {
   position: fixed;
   inset: 0;
   z-index: 1;
-  background: radial-gradient(circle at 5% 5%, rgba(10, 5, 20, 0.4), transparent 50%),
-              radial-gradient(circle at 95% 95%, rgba(5, 10, 26, 0.4), transparent 50%);
+  background: radial-gradient(circle at 8% 12%, rgba(60, 20, 90, 0.18), transparent 45%),
+              radial-gradient(circle at 90% 85%, rgba(20, 30, 80, 0.15), transparent 45%),
+              radial-gradient(circle at 50% 50%, rgba(30, 10, 60, 0.08), transparent 60%);
   pointer-events: none;
-  filter: blur(80px);
+  filter: blur(70px);
 }
 
 .ambient-blue-glow {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 50% -20%, rgba(5, 10, 26, 0.6), transparent 70%),
+  background: radial-gradient(ellipse at 30% -10%, rgba(80, 30, 140, 0.12), transparent 55%),
+              radial-gradient(ellipse at 75% 5%, rgba(30, 50, 120, 0.10), transparent 45%),
               radial-gradient(circle at 50% 120%, rgba(10, 5, 20, 0.4), transparent 70%);
   pointer-events: none;
   z-index: 0;
@@ -125,6 +127,44 @@ body {
   100% {
     background-position: -200% center;
   }
+}
+
+@keyframes diamondShimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+/* Diamond name effect classes */
+.plain-white-text {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-image: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  animation: none !important;
+}
+
+.diamond-shimmer-text {
+  background-image: linear-gradient(
+    120deg,
+    #ffffff 0%,
+    #a8d8ff 20%,
+    #ffffff 40%,
+    #e8c8ff 60%,
+    #ffe4c8 80%,
+    #ffffff 100%
+  ) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: diamondShimmer linear infinite !important;
+  filter: drop-shadow(0 0 12px rgba(168, 216, 255, 0.4)) !important;
 }
 
 /* Shining Diamond Hover for Headings */
@@ -189,7 +229,9 @@ p:hover *, li:hover *, span:hover *, a:hover *, dt:hover *, dd:hover *, label:ho
 /* Retain normal coloring for SVGs and structural graphics inside hover items */
 p:hover svg, li:hover svg, span:hover svg, a:hover svg, dt:hover svg, dd:hover svg, label:hover svg, strong:hover svg, em:hover svg, b:hover svg, i:hover svg, small:hover svg, th:hover svg, td:hover svg,
 p:hover path, li:hover path, span:hover path, a:hover path, dt:hover path, dd:hover path, label:hover path, strong:hover path, em:hover path, b:hover path, i:hover path, small:hover path, th:hover path, td:hover path,
-p:hover circle, li:hover circle, span:hover circle, a:hover circle, dt:hover circle, dd:hover circle, label:hover circle, strong:hover circle, em:hover circle, b:hover circle, i:hover circle, small:hover circle, th:hover circle, td:hover circle {
+p:hover circle, li:hover circle, span:hover circle, a:hover circle, dt:hover circle, dd:hover circle, label:hover circle, strong:hover circle, em:hover circle, b:hover circle, i:hover circle, small:hover circle, th:hover circle, td:hover circle,
+p:hover polyline, li:hover polyline, span:hover polyline, a:hover polyline, dt:hover polyline, dd:hover polyline, label:hover polyline, strong:hover polyline, a:hover line, span:hover line,
+p:hover rect, li:hover rect, span:hover rect, a:hover rect, dt:hover rect, dd:hover rect, label:hover rect, strong:hover rect {
   background: none !important;
   -webkit-background-clip: border-box !important;
   -webkit-text-fill-color: currentColor !important;
@@ -197,3 +239,34 @@ p:hover circle, li:hover circle, span:hover circle, a:hover circle, dt:hover cir
   filter: none !important;
   transform: none !important;
 }
+
+/* Hard-lock contact/social icons against the global shimmer — always visible */
+.contact-icon,
+.contact-icon svg,
+.contact-icon path,
+.contact-icon polyline,
+.contact-icon line,
+.contact-icon rect,
+.contact-icon circle {
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: unset !important;
+  color: unset !important;
+  stroke: rgba(255, 255, 255, 0.75) !important;
+  fill: none !important;
+  filter: none !important;
+  transform: none !important;
+  animation: none !important;
+  transition: stroke 0.4s ease !important;
+}
+
+a:hover .contact-icon svg,
+a:hover .contact-icon path,
+a:hover .contact-icon polyline,
+a:hover .contact-icon line,
+a:hover .contact-icon rect,
+a:hover .contact-icon circle {
+  stroke: rgba(255, 255, 255, 1) !important;
+}
+

@@ -1,10 +1,134 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import Image from "next/image";
-import { motion, useSpring, useMotionValue } from "framer-motion";
+import { motion, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
 import { TorchlightBackground } from "./TorchlightBackground";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
+
+// --- Diamond Sparkle Effect ---
+interface Sparkle {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+  angle: number;
+  duration: number;
+}
+
+const SPARKLE_COLORS = [
+  "#fff",
+  "#e0f0ff",
+  "#c8e6ff",
+  "#b0d4ff",
+  "#d4f0ff",
+  "#ffe4f0",
+  "#f0e4ff",
+];
+
+function randomBetween(min: number, max: number) {
+  return Math.random() * (max - min) + min;
+}
+
+function createSparkle(containerRect: DOMRect): Sparkle {
+  return {
+    id: Date.now() + Math.random(),
+    x: randomBetween(0, containerRect.width),
+    y: randomBetween(0, containerRect.height),
+    size: randomBetween(6, 18),
+    color: SPARKLE_COLORS[Math.floor(Math.random() * SPARKLE_COLORS.length)],
+    angle: randomBetween(0, 360),
+    duration: randomBetween(0.5, 1.0),
+  };
+}
+
+const SparkleIcon = ({ size, color, angle }: { size: number; color: string; angle: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill={color}
+    style={{ transform: `rotate(${angle}deg)`, filter: `drop-shadow(0 0 4px ${color})` }}
+  >
+    <path d="M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z" />
+  </svg>
+);
+
+const DiamondName = ({ firstName, lastName }: { firstName: string; lastName: string }) => {
+  const [sparkles, setSparkles] = useState<Sparkle[]>([]);
+  const [isHovered, setIsHovered] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startSparkles = useCallback(() => {
+    setIsHovered(true);
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const newSparkle = createSparkle(rect);
+      setSparkles((prev) => [...prev.slice(-18), newSparkle]);
+      setTimeout(() => {
+        setSparkles((prev) => prev.filter((s) => s.id !== newSparkle.id));
+      }, newSparkle.duration * 1000 + 100);
+    }, 80);
+  }, []);
+
+  const stopSparkles = useCallback(() => {
+    setIsHovered(false);
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative inline-block select-none pointer-events-auto cursor-default"
+      onMouseEnter={startSparkles}
+      onMouseLeave={stopSparkles}
+    >
+      {/* Sparkles layer */}
+      <div className="absolute inset-0 pointer-events-none overflow-visible z-20">
+        <AnimatePresence>
+          {sparkles.map((sparkle) => (
+            <motion.div
+              key={sparkle.id}
+              initial={{ opacity: 0, scale: 0, x: sparkle.x, y: sparkle.y }}
+              animate={{ opacity: [0, 1, 0], scale: [0, 1.2, 0], y: sparkle.y - 30 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: sparkle.duration, ease: "easeOut" }}
+              className="absolute"
+              style={{ left: 0, top: 0, transform: `translate(${sparkle.x}px, ${sparkle.y}px)` }}
+            >
+              <SparkleIcon size={sparkle.size} color={sparkle.color} angle={sparkle.angle} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      {/* Name text */}
+      <h1
+        className={`text-5xl md:text-[80px] lg:text-[92px] font-medium tracking-[-0.05em] leading-[0.9] inline-block whitespace-nowrap transition-all duration-500 ${isHovered ? "diamond-shimmer-text" : "plain-white-text"}`}
+        style={{
+          backgroundSize: "200% auto",
+          animationDuration: isHovered ? "1.5s" : "0s",
+        }}
+      >
+        {firstName}
+      </h1>
+      <br />
+      <h1
+        className={`text-5xl md:text-[80px] lg:text-[92px] font-bold tracking-[-0.05em] leading-[0.9] inline-block whitespace-nowrap transition-all duration-500 ${isHovered ? "diamond-shimmer-text" : "plain-white-text"}`}
+        style={{
+          backgroundSize: "200% auto",
+          animationDuration: isHovered ? "1.2s" : "0s",
+        }}
+      >
+        {lastName}
+      </h1>
+    </div>
+  );
+};
 
 const MagneticButton = ({ children, className, primary = false }: { children: React.ReactNode, className?: string, primary?: boolean }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -64,6 +188,17 @@ export const Hero: React.FC = () => {
       <div className="noise-bg" />
       <TorchlightBackground />
 
+      {/* Subtle Universe Nebula Overlay — hero only */}
+      <div className="absolute inset-0 pointer-events-none z-[2]"
+        style={{
+          background: `
+            radial-gradient(ellipse at 15% 30%, rgba(75, 20, 130, 0.10) 0%, transparent 50%),
+            radial-gradient(ellipse at 85% 20%, rgba(25, 40, 110, 0.09) 0%, transparent 45%),
+            radial-gradient(ellipse at 50% 85%, rgba(40, 15, 80, 0.07) 0%, transparent 40%)
+          `
+        }}
+      />
+
       {/* Main Content */}
       <div className="relative z-[50] w-full max-w-7xl px-6 md:px-24 flex flex-col md:flex-row items-center justify-between gap-12 md:gap-16 pt-24 md:pt-12 h-full pointer-events-none">
         
@@ -86,12 +221,7 @@ export const Hero: React.FC = () => {
             transition={{ duration: 1.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col gap-0"
           >
-            <h1 className="text-5xl md:text-[80px] lg:text-[92px] font-medium text-white tracking-[-0.05em] leading-[0.9] inline-block whitespace-nowrap">
-              Hemanth Kumar
-            </h1>
-            <h1 className="text-5xl md:text-[80px] lg:text-[92px] font-bold text-white tracking-[-0.05em] leading-[0.9] inline-block whitespace-nowrap">
-              Bandari
-            </h1>
+            <DiamondName firstName="Hemanth Kumar" lastName="Bandari" />
           </motion.div>
 
           <motion.div
