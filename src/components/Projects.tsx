@@ -21,10 +21,10 @@ const PROJECTS = [
     color: "from-blue-500/10"
   },
   {
-    title: "Sneakify",
-    description: "Premium e-commerce platform for high-end sneakers with 3D product visualization, real-time inventory, and secure payment processing.",
-    tech: ["Next.js", "TypeScript", "Three.js", "Prisma"],
-    github: "https://github.com/hemanthkumarbandari/sneakify",
+    title: "IND Masters",
+    description: "Comprehensive e-learning platform featuring specialized courses. Includes a robust frontend for students, a secure backend, and a fully-featured admin panel.",
+    tech: ["React.js", "Node.js", "Express", "MongoDB"],
+    github: "#",
     live: "#",
     color: "from-purple-500/10"
   }

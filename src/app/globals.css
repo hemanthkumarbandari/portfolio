@@ -103,3 +103,97 @@ body {
 .torch-trigger {
   position: relative;
 }
+
+/* -------------------------------------------------------------
+   PREMIUM DYNAMIC HOVER EFFECTS: DIAMOND & GOLD-SILVER SHINE
+   ------------------------------------------------------------- */
+
+/* Keyframe animations for moving metallic light sweeps */
+@keyframes shine-diamond {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+@keyframes shine-gold-silver {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+/* Shining Diamond Hover for Headings */
+h1, h2, h3, h4, h5, h6 {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              letter-spacing 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, filter;
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover,
+h1:hover *, h2:hover *, h3:hover *, h4:hover *, h5:hover *, h6:hover * {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #e0f2fe 15%,
+    #ffffff 30%,
+    #bae6fd 50%,
+    #ffffff 70%,
+    #7dd3fc 85%,
+    #ffffff 100%
+  ) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: shine-diamond 2s linear infinite !important;
+  filter: drop-shadow(0 0 8px rgba(186, 230, 253, 0.7)) 
+          drop-shadow(0 0 20px rgba(255, 255, 255, 0.3)) !important;
+  transform: translateY(-2px);
+}
+
+/* Shimmering Gold & Silver Hover for Normal Text */
+p, li, span, a, dt, dd, label, strong, em, b, i, small, th, td {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, filter;
+}
+
+p:hover, li:hover, span:hover, a:hover, dt:hover, dd:hover, label:hover, strong:hover, em:hover, b:hover, i:hover, small:hover, th:hover, td:hover,
+p:hover *, li:hover *, span:hover *, a:hover *, dt:hover *, dd:hover *, label:hover *, strong:hover *, em:hover *, b:hover *, i:hover *, small:hover *, th:hover *, td:hover * {
+  background: linear-gradient(
+    90deg,
+    #ffd700 0%,
+    #fef08a 15%,
+    #ffffff 35%,
+    #cbd5e1 50%,
+    #ffffff 65%,
+    #f59e0b 85%,
+    #ffd700 100%
+  ) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: shine-gold-silver 2.2s linear infinite !important;
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.55)) 
+          drop-shadow(0 0 15px rgba(255, 255, 255, 0.2)) !important;
+  transform: translateY(-0.5px);
+}
+
+/* Retain normal coloring for SVGs and structural graphics inside hover items */
+p:hover svg, li:hover svg, span:hover svg, a:hover svg, dt:hover svg, dd:hover svg, label:hover svg, strong:hover svg, em:hover svg, b:hover svg, i:hover svg, small:hover svg, th:hover svg, td:hover svg,
+p:hover path, li:hover path, span:hover path, a:hover path, dt:hover path, dd:hover path, label:hover path, strong:hover path, em:hover path, b:hover path, i:hover path, small:hover path, th:hover path, td:hover path,
+p:hover circle, li:hover circle, span:hover circle, a:hover circle, dt:hover circle, dd:hover circle, label:hover circle, strong:hover circle, em:hover circle, b:hover circle, i:hover circle, small:hover circle, th:hover circle, td:hover circle {
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: inherit !important;
+  filter: none !important;
+  transform: none !important;
+}

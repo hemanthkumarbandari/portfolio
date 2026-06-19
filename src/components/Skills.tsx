@@ -5,20 +5,20 @@ import { motion } from "framer-motion";
 
 const SKILL_GROUPS = [
   {
-    title: "Intelligence",
-    skills: ["TensorFlow", "PyTorch", "OpenAI", "LangChain", "RAG", "Vector DB", "Computer Vision"]
+    title: "Languages & Frameworks",
+    skills: ["Python", "JavaScript", "TypeScript", "HTML5", "CSS3"]
   },
   {
-    title: "Engineering",
-    skills: ["React", "Next.js", "TypeScript", "FastAPI", "Express", "PostgreSQL", "System Design"]
+    title: "Technologies",
+    skills: ["React.js", "Next.js", "Node.js", "FastAPI", "Express.js", "Three.js", "Tailwind CSS", "REST APIs", "PostgreSQL", "MySQL", "MongoDB"]
   },
   {
-    title: "Infrastructure",
-    skills: ["Docker", "Kubernetes", "AWS", "Git", "GitHub Actions", "Linux", "CI/CD Pipelines"]
+    title: "AI & Intelligent Systems",
+    skills: ["Artificial Intelligence", "Machine Learning", "Prompt Engineering", "AI Agents", "RAG", "TensorFlow", "Pandas", "Matplotlib"]
   },
   {
-    title: "Architecture",
-    skills: ["Prisma", "Redis", "MongoDB", "Microservices", "GraphQL", "Supabase", "Clean Code"]
+    title: "Tools & Platforms",
+    skills: ["Git", "GitHub", "Docker", "Jenkins", "Vercel", "Netlify", "Postman", "VS Code", "Jupyter", "Figma", "Canva", "Tableau", "Power BI"]
   }
 ];
 

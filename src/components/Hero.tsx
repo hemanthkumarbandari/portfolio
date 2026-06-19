@@ -86,10 +86,10 @@ export const Hero: React.FC = () => {
             transition={{ duration: 1.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col gap-0"
           >
-            <h1 className="text-5xl md:text-[80px] lg:text-[92px] font-medium text-white tracking-[-0.05em] leading-[0.9] inline-block">
+            <h1 className="text-5xl md:text-[80px] lg:text-[92px] font-medium text-white tracking-[-0.05em] leading-[0.9] inline-block whitespace-nowrap">
               Hemanth Kumar
             </h1>
-            <h1 className="text-5xl md:text-[80px] lg:text-[92px] font-bold text-white tracking-[-0.05em] leading-[0.9] inline-block">
+            <h1 className="text-5xl md:text-[80px] lg:text-[92px] font-bold text-white tracking-[-0.05em] leading-[0.9] inline-block whitespace-nowrap">
               Bandari
             </h1>
           </motion.div>

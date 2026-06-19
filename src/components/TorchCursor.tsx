@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export const TorchCursor: React.FC = () => {
+  const [mounted, setMounted] = useState(false);
   const [isHoveringTrigger, setIsHoveringTrigger] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   
@@ -13,6 +14,10 @@ export const TorchCursor: React.FC = () => {
   const springConfig = { damping: 25, stiffness: 250 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -40,7 +45,7 @@ export const TorchCursor: React.FC = () => {
     };
   }, [mouseX, mouseY, isVisible]);
 
-  if (typeof window === "undefined") return null;
+  if (!mounted) return null;
 
   return (
     <>
@@ -52,84 +57,60 @@ export const TorchCursor: React.FC = () => {
           opacity: isVisible ? 1 : 0,
         }}
       >
-        {/* Glow Effect */}
+        {/* Wide ambient spotlight */}
         <motion.div
           animate={{
-            scale: isHoveringTrigger ? 2.5 : 1.5,
-            opacity: isHoveringTrigger ? 0.7 : 0.4,
+            scale: isHoveringTrigger ? 1.2 : 1,
+            opacity: isHoveringTrigger ? 0.6 : 0.3,
           }}
-          className="absolute w-48 h-48 rounded-full bg-[radial-gradient(circle,_rgba(255,200,50,0.4)_0%,_rgba(255,150,0,0)_70%)] blur-2xl"
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="absolute w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,_rgba(255,255,255,0.1)_0%,_rgba(255,255,255,0.02)_40%,_transparent_70%)] blur-[60px]"
           style={{
-            left: -24, // Offset to align with torch tip
-            top: -24,
-            transform: "translate(-50%, -50%)",
+            left: "-400px",
+            top: "-400px",
           }}
         />
 
-        {/* Torch Image/SVG */}
-        <div 
-          className="absolute rotate-[-15deg]"
-          style={{
-            left: -15, // Offset so the tip is at the mouse point
-            top: -10,
+        {/* Mid-range cool glow */}
+        <motion.div
+          animate={{
+            scale: isHoveringTrigger ? 1.5 : 1,
+            opacity: isHoveringTrigger ? 0.8 : 0.4,
           }}
-        >
-          <svg
-            width="40"
-            height="40"
-            viewBox="0 0 40 40"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="drop-shadow-[0_0_8px_rgba(255,150,0,0.6)]"
-          >
-            {/* Wooden Handle */}
-            <path
-              d="M15 25 L25 35 L30 30 L20 20 Z"
-              fill="#5D4037"
-            />
-            <path
-              d="M18 22 L22 26 L27 21 L23 17 Z"
-              fill="#795548"
-            />
-            {/* Torch Tip/Metal Part */}
-            <rect
-              x="12"
-              y="12"
-              width="10"
-              height="10"
-              transform="rotate(-45 12 12)"
-              fill="#424242"
-            />
-            {/* Flame/Glow at the tip */}
-            <motion.path
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.9, 1, 0.9],
-              }}
-              transition={{
-                duration: 0.4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              d="M10 10 L15 4 L20 10 L15 16 Z"
-              fill="#FFD600"
-            />
-            <motion.path
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.7, 1, 0.7],
-              }}
-              transition={{
-                duration: 0.25,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.1,
-              }}
-              d="M12 12 L15 7 L18 12 L15 17 Z"
-              fill="#FF8F00"
-            />
-          </svg>
-        </div>
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="absolute w-[300px] h-[300px] rounded-full bg-[radial-gradient(circle,_rgba(186,230,253,0.3)_0%,_rgba(125,211,252,0.1)_50%,_transparent_80%)] blur-[30px]"
+          style={{
+            left: "-150px",
+            top: "-150px",
+          }}
+        />
+
+        {/* Core intense light source */}
+        <motion.div
+          animate={{
+            scale: isHoveringTrigger ? 1.5 : 1,
+            opacity: isHoveringTrigger ? 1 : 0.7,
+          }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          className="absolute w-[80px] h-[80px] rounded-full bg-[radial-gradient(circle,_rgba(255,255,255,0.9)_0%,_rgba(255,255,255,0.4)_40%,_transparent_80%)] blur-[8px]"
+          style={{
+            left: "-40px",
+            top: "-40px",
+          }}
+        />
+
+        {/* Tiny crisp dot for precision */}
+        <motion.div 
+          animate={{
+            scale: isHoveringTrigger ? 0 : 1,
+            opacity: isHoveringTrigger ? 0 : 1,
+          }}
+          className="absolute w-2 h-2 bg-white rounded-full shadow-[0_0_12px_rgba(255,255,255,1)]"
+          style={{
+            left: "-4px",
+            top: "-4px",
+          }}
+        />
       </motion.div>
     </>
   );

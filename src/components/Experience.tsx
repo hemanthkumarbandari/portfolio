@@ -15,7 +15,7 @@ const EXPERIENCES = [
   },
   {
     company: "VAIBHAVAMH",
-    role: "Database Developer Intern",
+    role: "Web Developer",
     period: "2023 - 2024",
     bullets: [
       "Designed high-performance PostgreSQL schemas and implemented advanced indexing strategies to handle millions of concurrent transactions with sub-100ms latency.",
@@ -23,7 +23,7 @@ const EXPERIENCES = [
     ]
   },
   {
-    company: "SOPHRION",
+    company: "Nuhvin Global Services",
     role: "Full-Stack Developer Intern",
     period: "2023",
     bullets: [
